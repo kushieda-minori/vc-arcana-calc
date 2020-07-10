@@ -49,12 +49,12 @@
                 "name":"Abyss Ymir",
                 "element":"Passion",
                 "rarity":"GLR",
-                "baseATK":55999,
-                "baseDEF":44799,
+                "baseAtk":55999,
+                "baseDef":44799,
                 "baseSol":52999,
-                "maxATK":75699,
-                "maxDEF":70099,
-                "maxSold":68999,
+                "maxAtk":75699,
+                "maxDef":70099,
+                "maxSol":68999,
                 "solPerfectMin":67997,
                 "solPerfectMax":83997,
                 "isClosed":false,
@@ -62,12 +62,12 @@
                 "maxRarityAtk":150000,
                 "maxRarityDef":150000,
                 "maxRaritySol":150000,
-                "rebirthbaseAtk":92300,
-                "rebirthbaseDef":89999,
-                "rebirthbaseSol":93100,
-                "rebirthmaxAtk":128100,
-                "rebirthmaxDef":116000,
-                "rebirthmaxSol":135000,
+                "rebirthBaseAtk":92300,
+                "rebirthBaseDef":89999,
+                "rebirthBaseSol":93100,
+                "rebirthMaxAtk":128100,
+                "rebirthMaxDef":116000,
+                "rebirthMaxSol":135000,
                 "rebirthMaxRarityAtk":200000,
                 "rebirthMaxRarityDef":200000,
                 "rebirthMaxRaritySol":200000,
@@ -124,15 +124,60 @@ function init() {
 // this function is to react to user selection changes of the card
 function cardChange(select,form) {
     var cardId = select.value;
+    var willRebirthCheck = form["rebirth"];
+    var maxLvlElement = document.getElementById("rarityMaxLevel");
     if(!cardId || !(Number.isInteger(cardId) && cardId > 0)) {
         selectedCard = null;
+        willRebirthCheck.disabled = true;
+        willRebirthCheck.checked = false;
+        maxLvlElement.textContent = "N/A";
     }
     // find the card in the cardInfo array
     const found = cardInfo.find(c => c.id == cardId);
     if(!found) {
         selectedCard = null;
+        willRebirthCheck.disabled = true;
+        willRebirthCheck.checked = false;
+        maxLvlElement.textContent = "N/A";
+        return;
     }
     selectedCard = found;
+    if (selectedCard.rebirthBaseAtk) {
+        willRebirthCheck.disabled = false;
+    } else {
+        willRebirthCheck.disabled = true;
+    }
+    rebirthChange(willRebirthCheck, form);
+}
+
+function rebirthChange(checkbox, form) {
+    if(!selectedCard) {
+        maxLvlElement.textContent = "N/A";
+        return;
+    }
+
+    var maxLvlElement = document.getElementById("rarityMaxLevel");
+    var maxLevelInput = form["maxLevel"];
+    var currentLevelInput = form["currentLevel"];
+    var currentAtkInput = form["currentAtk"];
+    var currentDefInput = form["currentDef"];
+    var currentSolInput = form["currentSol"];
+
+    if (!checkbox.disabled && checkbox.checked) {
+        maxLvlElement.textContent = selectedCard.rebirthMaxLevel;
+        maxLevelInput.max = selectedCard.rebirthMaxLevel;
+        currentLevelInput.max = selectedCard.rebirthMaxLevel;
+        currentAtkInput.max = selectedCard.rebirthMaxRarityAtk;
+        currentDefInput.max = selectedCard.rebirthMaxRarityDef;
+        currentDefInput.max = selectedCard.rebirthMaxRaritySol;
+    } else {
+        maxLvlElement.textContent = selectedCard.maxLevel;
+        maxLevelInput.max = selectedCard.maxLevel;
+        currentLevelInput.max = selectedCard.maxLevel;
+        currentAtkInput.max = selectedCard.maxRarityAtk;
+        currentDefInput.max = selectedCard.maxRarityDef;
+        currentDefInput.max = selectedCard.maxRaritySol;
+    }
 }
 
 // this function reacts to any of the values changing in the form
@@ -155,6 +200,65 @@ function calculateArcana(form) {
     if(!cardInfo || !cardInfo.length){
         alert("Card info is not set. Must be a problem with the `init` method");
     }
+
+    var atk50 = document.getElementById("atk50");
+    var atk500 = document.getElementById("atk500");
+    var atk3000 = document.getElementById("atk3000");
+    var def50 = document.getElementById("def50");
+    var def500 = document.getElementById("def500");
+    var def3000 = document.getElementById("def3000");
+    var soldiersMax = document.getElementById("soldiersMax");
+
+
+    var willRebirthCheck = form["rebirth"];
+    var willRebirth = !willRebirthCheck.disabled && willRebirthCheck.checked;
+    var maxLevel = Number(form["maxLevel"].value);
+    var currentLevel = Number(form["currentLevel"].value);
+    var levelGain = maxLevel - currentLevel;
+    var currentAtk = Number(form["currentAtk"].value);
+    var currentDef = Number(form["currentDef"].value);
+    var currentSol = Number(form["currentSol"].value);
+
+    var atkMissingAtMaxLvl;
+    var defMissingAtMaxLvl;
+    var solAtMaxLvl;
+
+    if (willRebirth) {
+        var atkGainTotal = selectedCard.rebirthMaxAtk - selectedCard.rebirthBaseAtk;
+        var atkGainPerLevel = atkGainTotal / (selectedCard.rebirthMaxLevel-1);
+        var atkGainedByLevels = levelGain * atkGainPerLevel;
+        var atkRebirthBonus = selectedCard.rebirthBaseAtk - selectedCard.baseAtk;
+        atkMissingAtMaxLvl = selectedCard.rebirthMaxRarityAtk - Math.min(selectedCard.rebirthMaxRarityAtk, currentAtk + atkRebirthBonus + Math.round(atkGainedByLevels));
+
+        var defGainTotal = selectedCard.rebirthMaxDef - selectedCard.rebirthBaseDef;
+        var defGainPerLevel = defGainTotal / (selectedCard.rebirthMaxLevel-1);
+        var defGainedByLevels = levelGain * defGainPerLevel
+        var defRebirthBonus = selectedCard.rebirthBaseDef - selectedCard.baseDef;
+        defMissingAtMaxLvl = selectedCard.rebirthMaxRarityDef - Math.min(selectedCard.rebirthMaxRarityDef, currentDef + defRebirthBonus + Math.round(defGainedByLevels));
+        
+        if (currentSol) {
+            solAtMaxLvl = Math.min(selectedCard.rebirthMaxRaritySol, currentSol + Math.round(levelGain * ((selectedCard.rebirthMaxSol - selectedCard.rebirthBaseSol) / (selectedCard.rebirthMaxLevel - 1))));
+        } else {
+            solAtMaxLvl = "";
+        }
+    } else {
+        atkMissingAtMaxLvl = selectedCard.maxRarityAtk - Math.min(selectedCard.maxRarityAtk, currentAtk + Math.round(levelGain * ((selectedCard.maxAtk - selectedCard.baseAtk) / (selectedCard.maxLevel - 1))));
+        defMissingAtMaxLvl = selectedCard.maxRarityDef - Math.min(selectedCard.maxRarityDef, currentDef + Math.round(levelGain * ((selectedCard.maxDef - selectedCard.baseDef) / (selectedCard.maxLevel - 1))));
+        if (currentSol) {
+            solAtMaxLvl = Math.min(selectedCard.maxRaritySol, currentSol + Math.round(levelGain * ((selectedCard.maxSol - selectedCard.baseSol) / (selectedCard.maxLevel - 1))));
+        } else {
+            solAtMaxLvl = "";
+        }
+    }
+    atk50.textContent = Math.ceil(atkMissingAtMaxLvl / 50);
+    atk500.textContent = Math.ceil(atkMissingAtMaxLvl / 500);
+    atk3000.textContent = Math.ceil(atkMissingAtMaxLvl / 3000);
+
+    def50.textContent = Math.ceil(defMissingAtMaxLvl / 50);
+    def500.textContent = Math.ceil(defMissingAtMaxLvl / 500);
+    def3000.textContent = Math.ceil(defMissingAtMaxLvl / 3000);
+
+    soldiersMax.textContent = solAtMaxLvl;
 }
         </script>
 	</head>
@@ -173,7 +277,7 @@ function calculateArcana(form) {
         </div>
         <div class="field">
             <label for="rebirth">Intending to rebirth:</label>
-            <input type="checkbox" name="rebirth" id="rebirth"/>
+            <input type="checkbox" name="rebirth" id="rebirth" disabled="true" onchange="rebirthChange(this,this.form);" />
         </div>
         <div class="field">
             <label for="currentLevel">Current Level:</label>
@@ -192,8 +296,8 @@ function calculateArcana(form) {
             <input type="number" min="1" max="200000" name="currentDef" id="currentDef" required="true" />
         </div>
         <div class="field">
-            <label for="currentSold">Current Soldiers (Optional):</label>
-            <input type="number" min="1" max="200000" name="currentSold" id="currentSold"/>
+            <label for="currentSol">Current Soldiers (Optional):</label>
+            <input type="number" min="1" max="200000" name="currentSol" id="currentSol"/>
         </div>
         <div>
             <button type="reset">Reset</button>
@@ -214,10 +318,12 @@ function calculateArcana(form) {
             <tr>
                 <td>Defense</td><td id="def50"></td><td id="def500"></td><td id="def3000"></td>
             </tr>
-            <tr>
-                <td>Soldiers</td><td id="sol50"></td><td id="sol500"></td><td id="sol3000"></td>
-            </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td>Expected Soldiers</td><td id="soldiersMax" colspan="3"></td>
+            </tr>
+        </tfoot>
     </table>
 </body>
 </html>
