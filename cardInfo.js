@@ -1,0 +1,31 @@
+var cardInfo=[
+    {
+        "id":8295,
+        "name":"Abyss Ymir",
+        "element":"Passion",
+        "rarity":"GLR",
+        "baseATK":55999,
+        "baseDEF":44799,
+        "baseSol":52999,
+        "maxATK":75699,
+        "maxDEF":70099,
+        "maxSold":68999,
+        "solPerfectMin":67997,
+        "solPerfectMax":83997,
+        "isClosed":false,
+        "maxLevel":110,
+        "maxRarityAtk":150000,
+        "maxRarityDef":150000,
+        "maxRaritySol":150000,
+        "rebirthbaseAtk":92300,
+        "rebirthbaseDef":89999,
+        "rebirthbaseSol":93100,
+        "rebirthmaxAtk":128100,
+        "rebirthmaxDef":116000,
+        "rebirthmaxSol":135000,
+        "rebirthMaxRarityAtk":200000,
+        "rebirthMaxRarityDef":200000,
+        "rebirthMaxRaritySol":200000,
+        "rebirthMaxLevel":130
+    }
+];

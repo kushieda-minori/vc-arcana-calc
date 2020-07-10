@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="page" lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="imagetoolbar" content="no" />
+		<meta name="msthemecompatible" content="no" />
+		<meta name="cleartype" content="on" />
+		<meta name="HandheldFriendly" content="True" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="google" value="notranslate" />
+		<meta name="theme-color" content="#ffffff" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<!-- <link sizes="57x57" href="apple-touch-icon-57x57.png" rel="apple-touch-icon" />
+		<link sizes="114x114" href="apple-touch-icon-114x114.png" rel="apple-touch-icon" />
+		<link sizes="72x72" href="apple-touch-icon-72x72.png" rel="apple-touch-icon" />
+		<link sizes="144x144" href="apple-touch-icon-144x144.png" rel="apple-touch-icon" />
+		<link sizes="60x60" href="apple-touch-icon-60x60.png" rel="apple-touch-icon" />
+		<link sizes="120x120" href="apple-touch-icon-120x120.png" rel="apple-touch-icon" />
+		<link sizes="76x76" href="apple-touch-icon-76x76.png" rel="apple-touch-icon" />
+		<link sizes="152x152" href="apple-touch-icon-152x152.png" rel="apple-touch-icon" />
+		<link sizes="180x180" href="apple-touch-icon-180x180.png" rel="apple-touch-icon" />
+		<link sizes="192x192" href="favicon-192x192.png" rel="icon" type="image/png" />
+		<link sizes="160x160" href="favicon-160x160.png" rel="icon" type="image/png" />
+		<link sizes="96x96" href="favicon-96x96.png" rel="icon" type="image/png" />
+		<link sizes="16x16" href="favicon-16x16.png" rel="icon" type="image/png" />
+        <link sizes="32x32" href="favicon-32x32.png" rel="icon" type="image/png" /> -->
+		<meta name="application-name" content="Arcana Calculator" />
+		<meta name="msapplication-tooltip" content="" />
+		<meta name="msapplication-TileColor" content="#ffffff" />
+		<meta name="msapplication-TileImage" content="mstile-large.png" />
+		<meta name="msapplication-tap-highlight" content="no" />
+		<meta name="msapplication-square70x70logo" content="mstile-small.png" />
+		<meta name="msapplication-square150x150logo" content="mstile-medium.png" />
+		<meta name="msapplication-wide310x150logo" content="mstile-wide.png" />
+		<meta name="msapplication-square310x310logo" content="mstile-large.png" />
+		<title>Arcana Calculator</title>
+		<meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <!--
+            cardInfo.js must contain a single var `cardInfo` defined as an array of
+            card objects. A card object looks like the following:
+            {
+                "id":8295,
+                "name":"Abyss Ymir",
+                "element":"Passion",
+                "rarity":"GLR",
+                "baseATK":55999,
+                "baseDEF":44799,
+                "baseSol":52999,
+                "maxATK":75699,
+                "maxDEF":70099,
+                "maxSold":68999,
+                "solPerfectMin":67997,
+                "solPerfectMax":83997,
+                "isClosed":false,
+                "maxLevel":110,
+                "maxRarityAtk":150000,
+                "maxRarityDef":150000,
+                "maxRaritySol":150000,
+                "rebirthbaseAtk":92300,
+                "rebirthbaseDef":89999,
+                "rebirthbaseSol":93100,
+                "rebirthmaxAtk":128100,
+                "rebirthmaxDef":116000,
+                "rebirthmaxSol":135000,
+                "rebirthMaxRarityAtk":200000,
+                "rebirthMaxRarityDef":200000,
+                "rebirthMaxRaritySol":200000,
+                "rebirthMaxLevel":130
+            }
+         -->
+        <script src="cardInfo.js"></script>
+        <style type="text/css">
+        /* Style Sheets determine the look and feel of the page. */
+label {
+    display:block;
+}
+.field {
+    padding-bottom:15px;
+}
+#results {
+    margin-top:20px;
+}
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+        </style>
+        <script type="text/javascript">
+var selectedCard = null;
+// this function is to initialize the form with card information
+function init() {
+    var cardSelect = document.forms["inputs"]["card"];
+    // card info is loaded from the script tag in the header.
+    if(!cardInfo.length){
+        alert("Card info did not load properly");
+        return false;
+    }
+
+    cardInfo.sort((a,b)=>{
+        if(a.name < b.name) return -1;
+        if(a.name > b.name) return 1;
+        if(a.rarity < b.rarity) return -1;
+        if(a.rarity > b.rarity) return 1;
+        return 0;
+    });
+
+    cardInfo.forEach(function(val,idx,arr){
+        var option = document.createElement("option");
+        option.value = val.id;
+        option.text = val.name + " - " + val.rarity;
+        cardSelect.add(option);
+    });
+}
+
+// this function is to react to user selection changes of the card
+function cardChange(select,form) {
+    var cardId = select.value;
+    if(!cardId || !(Number.isInteger(cardId) && cardId > 0)) {
+        selectedCard = null;
+    }
+    // find the card in the cardInfo array
+    const found = cardInfo.find(c => c.id == cardId);
+    if(!found) {
+        selectedCard = null;
+    }
+    selectedCard = found;
+}
+
+// this function reacts to any of the values changing in the form
+function formChange(form) {
+    // uncomment this if you don't want to have to hit the "Calculate" button
+    // calculateArcana(form);
+}
+
+function formValid(form) {
+    // check if the form is set and has the checkValidity method
+    if (!form || !form.checkValidity) return false;
+    // actually check the validation
+    return form.checkValidity();
+}
+function calculateArcana(form) {
+    if (!formValid(form)) {
+        return false;
+    }
+    // if our card info isn't initialized
+    if(!cardInfo || !cardInfo.length){
+        alert("Card info is not set. Must be a problem with the `init` method");
+    }
+}
+        </script>
+	</head>
+<body onload="init();">
+    <noscript>This web page requires Javascript to be enabled.</noscript>
+    <form id="inputs" onchange="formChange(this);" onsubmit="return false;" autocomplete="off">
+        <div class="field">
+            <label for="card">Card:</label>
+            <select name="card" id="card" onchange="cardChange(this,this.form);" required="true" placeholder="">
+                <option value="">---Select a card---</option>
+                <!-- 
+                    The rest of the options are added by javascript and loads the card info
+                    defined in cardInfo.js
+                 -->
+            </select>
+        </div>
+        <div class="field">
+            <label for="rebirth">Intending to rebirth:</label>
+            <input type="checkbox" name="rebirth" id="rebirth"/>
+        </div>
+        <div class="field">
+            <label for="currentLevel">Current Level:</label>
+            <input type="number" min="1" max="130" name="currentLevel" id="currentLevel" value="1" required="true" />
+        </div>
+        <div class="field">
+            <label for="maxLevel">Level you want to max stats:</label>
+            <input type="number" min="1" max="130" name="maxLevel" id="maxLevel" required="true" /> out of <span id="rarityMaxLevel">N/A</span>
+        </div>
+        <div class="field">
+            <label for="currentAtk">Current Attack:</label>
+            <input type="number" min="1" max="200000" name="currentAtk" id="currentAtk" required="true" />
+        </div>
+        <div class="field">
+            <label for="currentDef">Current Defense:</label>
+            <input type="number" min="1" max="200000" name="currentDef" id="currentDef" required="true" />
+        </div>
+        <div class="field">
+            <label for="currentSold">Current Soldiers (Optional):</label>
+            <input type="number" min="1" max="200000" name="currentSold" id="currentSold"/>
+        </div>
+        <div>
+            <button type="reset">Reset</button>
+            <button onclick="calculateArcana(this.form);">Calculate</button>
+        </div>
+    </form>
+    <table id="results">
+        <caption>Arcana Results</caption>
+        <thead>
+            <tr>
+                <th>Stat:</th><th>+50 Arcana</th><th>+500 Arcana</th><th>+3k Arcana</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Attack</td><td id="atk50"></td><td id="atk500"></td><td id="atk3000"></td>
+            </tr>
+            <tr>
+                <td>Defense</td><td id="def50"></td><td id="def500"></td><td id="def3000"></td>
+            </tr>
+            <tr>
+                <td>Soldiers</td><td id="sol50"></td><td id="sol500"></td><td id="sol3000"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
