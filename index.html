@@ -88,7 +88,7 @@ var selectedCard = null;
 function init() {
     var cardSelect = document.forms["inputs"]["card"];
     // card info is loaded from the script tag in the header.
-    if(!cardInfo.length){
+    if(typeof cardInfo === 'undefined' || !cardInfo.length){
         alert("Card info did not load properly");
         return false;
     }
@@ -110,7 +110,7 @@ function init() {
         option.text = val.name + " - " + val.rarity;
         cardSelect.add(option);
     });
-}
+};
 
 // this function is to react to user selection changes of the card
 function cardChange(select,form) {
@@ -139,7 +139,7 @@ function cardChange(select,form) {
         willRebirthCheck.disabled = true;
     }
     rebirthChange(willRebirthCheck, form);
-}
+};
 
 function rebirthChange(checkbox, form) {
     if(!selectedCard) {
@@ -170,20 +170,21 @@ function rebirthChange(checkbox, form) {
     currentAtkInput.max = cardToUseForStats.maxRarityAtk;
     currentDefInput.max = cardToUseForStats.maxRarityDef;
     currentDefInput.max = cardToUseForStats.maxRaritySol;
-}
+};
 
 // this function reacts to any of the values changing in the form
 function formChange(form) {
     // comment this if you want to have to hit the "Calculate" button
     calculateArcana(form);
-}
+};
 
 function formValid(form) {
     // check if the form is set and has the checkValidity method
     if (!form || !form.checkValidity) return false;
     // actually check the validation
     return form.checkValidity();
-}
+};
+
 function calculateArcana(form) {
     if (!formValid(form)) {
         return false;
@@ -262,7 +263,7 @@ function calculateArcana(form) {
     def3000.textContent = Math.ceil(defMissingAtMaxLvl / 3000);
 
     soldiersMax.textContent = solAtMaxLvl;
-}
+};
         </script>
 	</head>
 <body onload="init();">
@@ -328,5 +329,14 @@ function calculateArcana(form) {
             </tr>
         </tfoot>
     </table>
+    <div class="footer">
+        <p>
+            Have a problem? Bad calculation, missing card, want more information on display? Please fill out an <a href="https://github.com/kushieda-minori/vc-arcana-calc/issues/new/choose">issue</a>
+        </p>
+        <p>
+            Want to help me keep the card list up to date, or have a feature/fix you want to try yourself?
+            <a href="https://github.com/kushieda-minori/vc-arcana-calc">Fork</a> this page and work on it yourself. Create a pull request when done.
+        </p>
+    </div>
 </body>
 </html>
