@@ -45,34 +45,22 @@
             cardInfo.js must contain a single var `cardInfo` defined as an array of
             card objects. A card object looks like the following:
             {
-                "id":8295,
-                "name":"Abyss Ymir",
+                "id":5616,
+                "name":"Wise Oracle",
                 "element":"Passion",
                 "rarity":"GLR",
-                "baseAtk":55999,
-                "baseDef":44799,
-                "baseSol":52999,
-                "maxAtk":75699,
-                "maxDef":70099,
-                "maxSol":68999,
-                "solPerfectMin":67997,
-                "solPerfectMax":83997,
-                "isClosed":false,
+                "baseAtk":44799,
+                "baseDef":55999,
+                "baseSol":51999,
+                "maxAtk":70000,
+                "maxDef":75600,
+                "maxSol":68900,
                 "maxLevel":110,
                 "maxRarityAtk":150000,
                 "maxRarityDef":150000,
                 "maxRaritySol":150000,
-                "rebirthBaseAtk":92300,
-                "rebirthBaseDef":89999,
-                "rebirthBaseSol":93100,
-                "rebirthMaxAtk":128100,
-                "rebirthMaxDef":116000,
-                "rebirthMaxSol":135000,
-                "rebirthMaxRarityAtk":200000,
-                "rebirthMaxRarityDef":200000,
-                "rebirthMaxRaritySol":200000,
-                "rebirthMaxLevel":130
-            }
+                "rebirthCardId":7175,
+                "isClosed":false}
          -->
         <script src="cardInfo.js"></script>
         <style type="text/css">
@@ -106,10 +94,13 @@ function init() {
     }
 
     cardInfo.sort((a,b)=>{
+        // sort on names first
         if(a.name < b.name) return -1;
         if(a.name > b.name) return 1;
+        // names are equal, sort on rarity
         if(a.rarity < b.rarity) return -1;
         if(a.rarity > b.rarity) return 1;
+        // name and rarity are the same
         return 0;
     });
 
@@ -142,7 +133,7 @@ function cardChange(select,form) {
         return;
     }
     selectedCard = found;
-    if (selectedCard.rebirthBaseAtk) {
+    if (selectedCard.rebirthCardId) {
         willRebirthCheck.disabled = false;
     } else {
         willRebirthCheck.disabled = true;
@@ -163,21 +154,22 @@ function rebirthChange(checkbox, form) {
     var currentDefInput = form["currentDef"];
     var currentSolInput = form["currentSol"];
 
+    var cardToUseForStats;
+
     if (!checkbox.disabled && checkbox.checked) {
-        maxLvlElement.textContent = selectedCard.rebirthMaxLevel;
-        maxLevelInput.max = selectedCard.rebirthMaxLevel;
-        currentLevelInput.max = selectedCard.rebirthMaxLevel;
-        currentAtkInput.max = selectedCard.rebirthMaxRarityAtk;
-        currentDefInput.max = selectedCard.rebirthMaxRarityDef;
-        currentDefInput.max = selectedCard.rebirthMaxRaritySol;
+        cardToUseForStats =
+            cardInfo.find(c =>
+                            c.id == selectedCard.rebirthCardId
+                        ) || selectedCard;
     } else {
-        maxLvlElement.textContent = selectedCard.maxLevel;
-        maxLevelInput.max = selectedCard.maxLevel;
-        currentLevelInput.max = selectedCard.maxLevel;
-        currentAtkInput.max = selectedCard.maxRarityAtk;
-        currentDefInput.max = selectedCard.maxRarityDef;
-        currentDefInput.max = selectedCard.maxRaritySol;
+        cardToUseForStats = selectedCard;
     }
+    maxLvlElement.textContent = cardToUseForStats.maxLevel;
+    maxLevelInput.max = cardToUseForStats.maxLevel;
+    currentLevelInput.max = selectedCard.maxLevel;
+    currentAtkInput.max = cardToUseForStats.maxRarityAtk;
+    currentDefInput.max = cardToUseForStats.maxRarityDef;
+    currentDefInput.max = cardToUseForStats.maxRaritySol;
 }
 
 // this function reacts to any of the values changing in the form
@@ -224,20 +216,31 @@ function calculateArcana(form) {
     var solAtMaxLvl;
 
     if (willRebirth) {
-        var atkGainTotal = selectedCard.rebirthMaxAtk - selectedCard.rebirthBaseAtk;
-        var atkGainPerLevel = atkGainTotal / (selectedCard.rebirthMaxLevel-1);
-        var atkGainedByLevels = levelGain * atkGainPerLevel;
-        var atkRebirthBonus = selectedCard.rebirthBaseAtk - selectedCard.baseAtk;
-        atkMissingAtMaxLvl = selectedCard.rebirthMaxRarityAtk - Math.min(selectedCard.rebirthMaxRarityAtk, currentAtk + atkRebirthBonus + Math.round(atkGainedByLevels));
+        var rebirthCard = cardInfo.find(c => c.id == selectedCard.rebirthCardId);
 
-        var defGainTotal = selectedCard.rebirthMaxDef - selectedCard.rebirthBaseDef;
-        var defGainPerLevel = defGainTotal / (selectedCard.rebirthMaxLevel-1);
-        var defGainedByLevels = levelGain * defGainPerLevel
-        var defRebirthBonus = selectedCard.rebirthBaseDef - selectedCard.baseDef;
-        defMissingAtMaxLvl = selectedCard.rebirthMaxRarityDef - Math.min(selectedCard.rebirthMaxRarityDef, currentDef + defRebirthBonus + Math.round(defGainedByLevels));
+        var calcStat = function(current, base, max, rbBase, rbMax, rbMaxRarityStat){
+            var statGainTotal = rbMax - rbBase;
+            var statGainPerLevel = statGainTotal / (rebirthCard.maxLevel - 1);
+            var statGainedByLevels = (maxLevel-1) * statGainPerLevel;
+            var statRebirthBonus = rbBase - base - Math.round((currentLevel-1) * ((max - base) / (selectedCard.maxLevel - 1)));
+            return Math.min(rbMaxRarityStat, current + statRebirthBonus + Math.round(statGainedByLevels));
+        };
+
+        atkMissingAtMaxLvl = rebirthCard.maxRarityAtk - calcStat(currentAtk,
+                selectedCard.baseAtk, selectedCard.maxAtk,
+                rebirthCard.baseAtk, rebirthCard.maxAtk, rebirthCard.maxRarityAtk
+        );
+
+        defMissingAtMaxLvl = rebirthCard.maxRarityDef - calcStat(currentDef,
+                selectedCard.baseDef, selectedCard.maxDef,
+                rebirthCard.baseDef, rebirthCard.maxDef, rebirthCard.maxRarityDef
+        );
         
         if (currentSol) {
-            solAtMaxLvl = Math.min(selectedCard.rebirthMaxRaritySol, currentSol + Math.round(levelGain * ((selectedCard.rebirthMaxSol - selectedCard.rebirthBaseSol) / (selectedCard.rebirthMaxLevel - 1))));
+            solAtMaxLvl = calcStat(currentSol,
+                    selectedCard.baseSol, selectedCard.maxSol,
+                    rebirthCard.baseSol, rebirthCard.maxSol, rebirthCard.maxRaritySol
+            );
         } else {
             solAtMaxLvl = "";
         }
