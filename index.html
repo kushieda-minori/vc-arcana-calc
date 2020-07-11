@@ -80,6 +80,7 @@ table {
 
 table, th, td {
   border: 1px solid black;
+  padding: 3px;
 }
         </style>
         <script type="text/javascript">
@@ -194,15 +195,22 @@ function calculateArcana(form) {
         alert("Card info is not set. Must be a problem with the `init` method");
     }
 
+    // result locations
+    var atkMissing = document.getElementById("atkMissing");
+    var atkTarget = document.getElementById("atkTarget");
     var atk50 = document.getElementById("atk50");
     var atk500 = document.getElementById("atk500");
     var atk3000 = document.getElementById("atk3000");
+
+    var defMissing = document.getElementById("defMissing");
+    var defTarget = document.getElementById("defTarget");
     var def50 = document.getElementById("def50");
     var def500 = document.getElementById("def500");
     var def3000 = document.getElementById("def3000");
+
     var soldiersMax = document.getElementById("soldiersMax");
 
-
+    // values from the form
     var willRebirthCheck = form["rebirth"];
     var willRebirth = !willRebirthCheck.disabled && willRebirthCheck.checked;
     var maxLevel = Number(form["maxLevel"].value);
@@ -212,6 +220,7 @@ function calculateArcana(form) {
     var currentDef = Number(form["currentDef"].value);
     var currentSol = Number(form["currentSol"].value);
 
+    // calculated values
     var atkMissingAtMaxLvl;
     var defMissingAtMaxLvl;
     var solAtMaxLvl;
@@ -254,10 +263,15 @@ function calculateArcana(form) {
             solAtMaxLvl = "";
         }
     }
+    
+    atkMissing.textContent = atkMissingAtMaxLvl;
+    atkTarget.textContent = atkMissingAtMaxLvl + currentAtk;
     atk50.textContent = Math.ceil(atkMissingAtMaxLvl / 50);
     atk500.textContent = Math.ceil(atkMissingAtMaxLvl / 500);
     atk3000.textContent = Math.ceil(atkMissingAtMaxLvl / 3000);
 
+    defMissing.textContent = defMissingAtMaxLvl;
+    defTarget.textContent = defMissingAtMaxLvl + currentDef;
     def50.textContent = Math.ceil(defMissingAtMaxLvl / 50);
     def500.textContent = Math.ceil(defMissingAtMaxLvl / 500);
     def3000.textContent = Math.ceil(defMissingAtMaxLvl / 3000);
@@ -312,30 +326,32 @@ function calculateArcana(form) {
         <caption>Arcana Results</caption>
         <thead>
             <tr>
-                <th>Stat:</th><th>+50 Arcana</th><th>+500 Arcana</th><th>+3k Arcana</th>
+                <th>Stat:</th><th>Amt Needed</th><th>Target</th><th>+50 Arcana</th><th>+500 Arcana</th><th>+3k Arcana</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Attack</td><td id="atk50"></td><td id="atk500"></td><td id="atk3000"></td>
+                <td>Attack</td><td id="atkMissing"></td><td id="atkTarget"></td><td id="atk50"></td><td id="atk500"></td><td id="atk3000"></td>
             </tr>
             <tr>
-                <td>Defense</td><td id="def50"></td><td id="def500"></td><td id="def3000"></td>
+                <td>Defense</td><td id="defMissing"></td><td id=defTarget></td><td id="def50"></td><td id="def500"></td><td id="def3000"></td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td>Expected Soldiers</td><td id="soldiersMax" colspan="3"></td>
+                <td>Expected Soldiers</td><td id="soldiersMax" colspan="5"></td>
             </tr>
         </tfoot>
     </table>
     <div class="footer">
         <p>
-            Have a problem? Bad calculation, missing card, want more information on display? Please fill out an <a href="https://github.com/kushieda-minori/vc-arcana-calc/issues/new/choose">issue</a>
+            Have a problem? Bad calculation, missing card, want more information on display?
+            Please fill out an <a href="https://github.com/kushieda-minori/vc-arcana-calc/issues/new/choose">issue</a>.
         </p>
         <p>
             Want to help me keep the card list up to date, or have a feature/fix you want to try yourself?
-            <a href="https://github.com/kushieda-minori/vc-arcana-calc">Fork</a> this page and work on it yourself. Create a pull request when done.
+            <a href="https://github.com/kushieda-minori/vc-arcana-calc">Fork</a> this page and work on it yourself.
+            Create a pull request when done.
         </p>
     </div>
 </body>
