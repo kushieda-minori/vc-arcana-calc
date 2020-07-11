@@ -1,80 +1,112 @@
 <!DOCTYPE html>
 <html class="page" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="imagetoolbar" content="no" />
+    <meta name="msthemecompatible" content="no" />
+    <meta name="cleartype" content="on" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="google" value="notranslate" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- <link sizes="57x57" href="apple-touch-icon-57x57.png" rel="apple-touch-icon" />
+    <link sizes="114x114" href="apple-touch-icon-114x114.png" rel="apple-touch-icon" />
+    <link sizes="72x72" href="apple-touch-icon-72x72.png" rel="apple-touch-icon" />
+    <link sizes="144x144" href="apple-touch-icon-144x144.png" rel="apple-touch-icon" />
+    <link sizes="60x60" href="apple-touch-icon-60x60.png" rel="apple-touch-icon" />
+    <link sizes="120x120" href="apple-touch-icon-120x120.png" rel="apple-touch-icon" />
+    <link sizes="76x76" href="apple-touch-icon-76x76.png" rel="apple-touch-icon" />
+    <link sizes="152x152" href="apple-touch-icon-152x152.png" rel="apple-touch-icon" />
+    <link sizes="180x180" href="apple-touch-icon-180x180.png" rel="apple-touch-icon" />
+    <link sizes="192x192" href="favicon-192x192.png" rel="icon" type="image/png" />
+    <link sizes="160x160" href="favicon-160x160.png" rel="icon" type="image/png" />
+    <link sizes="96x96" href="favicon-96x96.png" rel="icon" type="image/png" />
+    <link sizes="16x16" href="favicon-16x16.png" rel="icon" type="image/png" />
+    <link sizes="32x32" href="favicon-32x32.png" rel="icon" type="image/png" /> -->
+    <meta name="application-name" content="Arcana Calculator" />
+    <meta name="msapplication-tooltip" content="" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="mstile-large.png" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="msapplication-square70x70logo" content="mstile-small.png" />
+    <meta name="msapplication-square150x150logo" content="mstile-medium.png" />
+    <meta name="msapplication-wide310x150logo" content="mstile-wide.png" />
+    <meta name="msapplication-square310x310logo" content="mstile-large.png" />
+    <title>Arcana Calculator</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
 
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="imagetoolbar" content="no" />
-		<meta name="msthemecompatible" content="no" />
-		<meta name="cleartype" content="on" />
-		<meta name="HandheldFriendly" content="True" />
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="format-detection" content="address=no" />
-		<meta name="google" value="notranslate" />
-		<meta name="theme-color" content="#ffffff" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<!-- <link sizes="57x57" href="apple-touch-icon-57x57.png" rel="apple-touch-icon" />
-		<link sizes="114x114" href="apple-touch-icon-114x114.png" rel="apple-touch-icon" />
-		<link sizes="72x72" href="apple-touch-icon-72x72.png" rel="apple-touch-icon" />
-		<link sizes="144x144" href="apple-touch-icon-144x144.png" rel="apple-touch-icon" />
-		<link sizes="60x60" href="apple-touch-icon-60x60.png" rel="apple-touch-icon" />
-		<link sizes="120x120" href="apple-touch-icon-120x120.png" rel="apple-touch-icon" />
-		<link sizes="76x76" href="apple-touch-icon-76x76.png" rel="apple-touch-icon" />
-		<link sizes="152x152" href="apple-touch-icon-152x152.png" rel="apple-touch-icon" />
-		<link sizes="180x180" href="apple-touch-icon-180x180.png" rel="apple-touch-icon" />
-		<link sizes="192x192" href="favicon-192x192.png" rel="icon" type="image/png" />
-		<link sizes="160x160" href="favicon-160x160.png" rel="icon" type="image/png" />
-		<link sizes="96x96" href="favicon-96x96.png" rel="icon" type="image/png" />
-		<link sizes="16x16" href="favicon-16x16.png" rel="icon" type="image/png" />
-        <link sizes="32x32" href="favicon-32x32.png" rel="icon" type="image/png" /> -->
-		<meta name="application-name" content="Arcana Calculator" />
-		<meta name="msapplication-tooltip" content="" />
-		<meta name="msapplication-TileColor" content="#ffffff" />
-		<meta name="msapplication-TileImage" content="mstile-large.png" />
-		<meta name="msapplication-tap-highlight" content="no" />
-		<meta name="msapplication-square70x70logo" content="mstile-small.png" />
-		<meta name="msapplication-square150x150logo" content="mstile-medium.png" />
-		<meta name="msapplication-wide310x150logo" content="mstile-wide.png" />
-		<meta name="msapplication-square310x310logo" content="mstile-large.png" />
-		<title>Arcana Calculator</title>
-		<meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <!--
-            cardInfo.js must contain a single var `cardInfo` defined as an array of
-            card objects. A card object looks like the following:
-            {
-                "id":5616,
-                "name":"Wise Oracle",
-                "element":"Passion",
-                "rarity":"GLR",
-                "baseAtk":44799,
-                "baseDef":55999,
-                "baseSol":51999,
-                "maxAtk":70000,
-                "maxDef":75600,
-                "maxSol":68900,
-                "maxLevel":110,
-                "maxRarityAtk":150000,
-                "maxRarityDef":150000,
-                "maxRaritySol":150000,
-                "rebirthCardId":7175,
-                "isClosed":false}
-         -->
-        <script src="cardInfo.js"></script>
-        <style type="text/css">
-        /* Style Sheets determine the look and feel of the page. */
+    <!--
+        cardInfo.js must contain a single var `cardInfo` defined as an array of
+        card objects. A card object looks like the following:
+        {
+            "id":5616,
+            "name":"Wise Oracle",
+            "element":"Passion",
+            "rarity":"GLR",
+            "baseAtk":44799,
+            "baseDef":55999,
+            "baseSol":51999,
+            "maxAtk":70000,
+            "maxDef":75600,
+            "maxSol":68900,
+            "maxLevel":110,
+            "maxRarityAtk":150000,
+            "maxRarityDef":150000,
+            "maxRaritySol":150000,
+            "perfectSoldierCount":83298,
+            "rebirthCardId":7175,
+            "isClosed":false
+        }
+        -->
+    <script src="cardInfo.js"></script>
+
+    <style type="text/css">
+/* Style Sheets determine the look and feel of the page. */
 label {
     display:block;
 }
+
+#inputs {
+    max-width: 550px;
+}
+
+/* the has selector is only valid in CSS4 which no browsers actually support yet */
+.field:has(input:disabled) {
+    display:none;
+}
+
+.field:has(input:enabled) {
+    display:initial;
+}
+
 .field {
     padding-bottom:15px;
+    width: 100%;
 }
-#results {
-    margin-top:20px;
+
+.col {
+    display:flex;
 }
+.col div.field {
+    flex:auto;
+}
+
+#currentLevel, #maxLevel {
+    width: 7ch;
+}
+
+#currentAtk, #currentDef, #currentSol {
+    width: 10ch;
+}
+
 table {
+  margin-top:20px;
   border-collapse: collapse;
 }
 
@@ -82,8 +114,13 @@ table, th, td {
   border: 1px solid black;
   padding: 3px;
 }
-        </style>
-        <script type="text/javascript">
+
+.footer {
+    font-size: 0.8em;
+}
+    </style>
+
+    <script type="text/javascript">
 var selectedCard = null;
 // this function is to initialize the form with card information
 function init() {
@@ -165,13 +202,38 @@ function rebirthChange(checkbox, form) {
     } else {
         cardToUseForStats = selectedCard;
     }
+
+    
     maxLvlElement.textContent = cardToUseForStats.maxLevel;
-    maxLevelInput.max = cardToUseForStats.maxLevel;
-    currentLevelInput.max = selectedCard.maxLevel;
+    updateLevelLimits(currentLevelInput, maxLevelInput, cardToUseForStats)
+
     currentAtkInput.max = cardToUseForStats.maxRarityAtk;
     currentDefInput.max = cardToUseForStats.maxRarityDef;
     currentDefInput.max = cardToUseForStats.maxRaritySol;
+
+    currentSolInput.min = selectedCard.baseSol;
 };
+
+function updateLevelLimits(currentLevelInput, maxLevelInput, card) {
+    currentLevelInput.max = Math.min(selectedCard.maxLevel, Number(maxLevelInput.value) || selectedCard.maxLevel);
+    maxLevelInput.min = Math.max(Number(currentLevelInput.value) || 0, 1);
+    maxLevelInput.max = card.maxLevel;
+};
+
+function levelChange(input, form) {
+    var cardToUseForStats;
+    var checkbox = form["rebirth"];
+    if (!checkbox.disabled && checkbox.checked) {
+        cardToUseForStats =
+            cardInfo.find(c =>
+                            c.id == selectedCard.rebirthCardId
+                        ) || selectedCard;
+    } else {
+        cardToUseForStats = selectedCard;
+    }
+
+    updateLevelLimits(form["currentLevel"], form["maxLevel"], cardToUseForStats);
+}
 
 // this function reacts to any of the values changing in the form
 function formChange(form) {
@@ -209,6 +271,8 @@ function calculateArcana(form) {
     var def3000 = document.getElementById("def3000");
 
     var soldiersMax = document.getElementById("soldiersMax");
+    var soldiersPerfect = document.getElementById("soldiersPerfect");
+    var soldiersDifference = document.getElementById("soldiersDifference");
 
     // values from the form
     var willRebirthCheck = form["rebirth"];
@@ -224,6 +288,7 @@ function calculateArcana(form) {
     var atkMissingAtMaxLvl;
     var defMissingAtMaxLvl;
     var solAtMaxLvl;
+    var solPerfectEvo;
 
     if (willRebirth) {
         var rebirthCard = cardInfo.find(c => c.id == selectedCard.rebirthCardId);
@@ -254,6 +319,7 @@ function calculateArcana(form) {
         } else {
             solAtMaxLvl = "";
         }
+        solPerfectEvo = rebirthCard.perfectSoldierCount;
     } else {
         atkMissingAtMaxLvl = selectedCard.maxRarityAtk - Math.min(selectedCard.maxRarityAtk, currentAtk + Math.round(levelGain * ((selectedCard.maxAtk - selectedCard.baseAtk) / (selectedCard.maxLevel - 1))));
         defMissingAtMaxLvl = selectedCard.maxRarityDef - Math.min(selectedCard.maxRarityDef, currentDef + Math.round(levelGain * ((selectedCard.maxDef - selectedCard.baseDef) / (selectedCard.maxLevel - 1))));
@@ -262,6 +328,7 @@ function calculateArcana(form) {
         } else {
             solAtMaxLvl = "";
         }
+        solPerfectEvo = selectedCard.perfectSoldierCount;
     }
     
     atkMissing.textContent = atkMissingAtMaxLvl;
@@ -277,47 +344,55 @@ function calculateArcana(form) {
     def3000.textContent = Math.ceil(defMissingAtMaxLvl / 3000);
 
     soldiersMax.textContent = solAtMaxLvl;
+    soldiersPerfect.textContent = solPerfectEvo;
+    soldiersDifference.textContent = solPerfectEvo - solAtMaxLvl;
 };
-        </script>
-	</head>
+    </script>
+</head>
 <body onload="init();">
     <noscript>This web page requires Javascript to be enabled.</noscript>
     <form id="inputs" onchange="formChange(this);" onsubmit="return false;" autocomplete="off">
-        <div class="field">
-            <label for="card">Card:</label>
-            <select name="card" id="card" onchange="cardChange(this,this.form);" required="true" placeholder="">
-                <option value="">---Select a card---</option>
-                <!-- 
-                    The rest of the options are added by javascript and loads the card info
-                    defined in cardInfo.js
-                 -->
-            </select>
+        <div class="col">
+            <div class="field">
+                <label for="card">Card:</label>
+                <select name="card" id="card" onchange="cardChange(this,this.form);" required="true" placeholder="">
+                    <option value="">---Select a card---</option>
+                    <!-- 
+                        The rest of the options are added by javascript and loads the card info
+                        defined in cardInfo.js
+                    -->
+                </select>
+            </div>
+            <div class="field">
+                <label for="rebirth">Intending to rebirth:</label>
+                <input type="checkbox" name="rebirth" id="rebirth" disabled="true" onchange="rebirthChange(this,this.form);" />
+            </div>
         </div>
-        <div class="field">
-            <label for="rebirth">Intending to rebirth:</label>
-            <input type="checkbox" name="rebirth" id="rebirth" disabled="true" onchange="rebirthChange(this,this.form);" />
+        <div class="col">
+            <div class="field">
+                <label for="currentLevel">Current Level:</label>
+                <input type="number" min="1" max="130" name="currentLevel" id="currentLevel" value="1" required="true" onchange="levelChange(this,this.form);" />
+            </div>
+            <div class="field">
+                <label for="maxLevel">Level you want to max stats:</label>
+                <input type="number" min="1" max="130" name="maxLevel" id="maxLevel" required="true" onchange="levelChange(this,this.form);" /> out of <span id="rarityMaxLevel">N/A</span>
+            </div>
         </div>
-        <div class="field">
-            <label for="currentLevel">Current Level:</label>
-            <input type="number" min="1" max="130" name="currentLevel" id="currentLevel" value="1" required="true" />
-        </div>
-        <div class="field">
-            <label for="maxLevel">Level you want to max stats:</label>
-            <input type="number" min="1" max="130" name="maxLevel" id="maxLevel" required="true" /> out of <span id="rarityMaxLevel">N/A</span>
-        </div>
-        <div class="field">
-            <label for="currentAtk">Current Attack:</label>
-            <input type="number" min="1" max="200000" name="currentAtk" id="currentAtk" required="true" />
-        </div>
-        <div class="field">
-            <label for="currentDef">Current Defense:</label>
-            <input type="number" min="1" max="200000" name="currentDef" id="currentDef" required="true" />
+        <div class="col">
+            <div class="field">
+                <label for="currentAtk">Current Attack:</label>
+                <input type="number" min="1" max="200000" name="currentAtk" id="currentAtk" required="true" />
+            </div>
+            <div class="field">
+                <label for="currentDef">Current Defense:</label>
+                <input type="number" min="1" max="200000" name="currentDef" id="currentDef" required="true" />
+            </div>
         </div>
         <div class="field">
             <label for="currentSol">Current Soldiers (Optional):</label>
             <input type="number" min="1" max="200000" name="currentSol" id="currentSol"/>
         </div>
-        <div>
+        <div style="clear:both;">
             <button type="reset">Reset</button>
             <button onclick="calculateArcana(this.form);">Calculate</button>
         </div>
@@ -337,11 +412,19 @@ function calculateArcana(form) {
                 <td>Defense</td><td id="defMissing"></td><td id=defTarget></td><td id="def50"></td><td id="def500"></td><td id="def3000"></td>
             </tr>
         </tbody>
-        <tfoot>
+    </table>
+    <table id="soldierInfo">
+        <caption>Soldier Info</caption>
+        <thead>
             <tr>
-                <td>Expected Soldiers</td><td id="soldiersMax" colspan="5"></td>
+                <th>Expected</th><th>Perfect Evo</th><th>Difference</th>
             </tr>
-        </tfoot>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="soldiersMax">&nbsp;</td><td id="soldiersPerfect"></td><td id="soldiersDifference"></td>
+            </tr>
+        </tbody>
     </table>
     <div class="footer">
         <p>
