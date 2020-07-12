@@ -1,15 +1,33 @@
 /* Style Sheets determine the look and feel of the page. */
-@media (prefers-color-scheme: dark) {
-    body {
-        background: #333;
-        color: #ddd;
-    }
-    input, select, button {
-        background: #888;
-        color: #ddd;
-        border-color: #ccc;
-    }
+/* Dark mode overrides */
+.dark-mode {
+    background: #333;
+    color: #ddd;
 }
+
+.dark-mode input, .dark-mode select, .dark-mode button {
+    background: #888;
+    color: #ddd;
+    border-color: #ccc;
+}
+
+.dark-mode :link {
+    color: #f5f5f5;
+}
+
+.dark-mode a:hover {
+    color: rgb(255, 254, 192);
+}
+
+.dark-mode a:active {
+    color: rgb(255, 235, 192);
+}
+
+.dark-mode :visited {
+    color: pink;
+}
+
+/* common styles*/
 
 label {
     display:block;
