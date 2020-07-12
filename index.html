@@ -207,11 +207,14 @@ function rebirthChange(checkbox, form) {
     maxLvlElement.textContent = cardToUseForStats.maxLevel;
     updateLevelLimits(currentLevelInput, maxLevelInput, cardToUseForStats)
 
-    currentAtkInput.max = cardToUseForStats.maxRarityAtk;
-    currentDefInput.max = cardToUseForStats.maxRarityDef;
-    currentDefInput.max = cardToUseForStats.maxRaritySol;
-
+    currentAtkInput.min = selectedCard.baseAtk;
+    currentAtkInput.max = selectedCard.maxRarityAtk;
+    
+    currentDefInput.min = selectedCard.baseDef;
+    currentDefInput.max = selectedCard.maxRarityDef;
+    
     currentSolInput.min = selectedCard.baseSol;
+    currentSolInput.max = selectedCard.maxRaritySol;
 };
 
 function updateLevelLimits(currentLevelInput, maxLevelInput, card) {
