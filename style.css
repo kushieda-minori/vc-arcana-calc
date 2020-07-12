@@ -1,0 +1,63 @@
+/* Style Sheets determine the look and feel of the page. */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #333;
+        color: #ddd;
+    }
+    input, select, button {
+        background: #888;
+        color: #ddd;
+        border-color: #ccc;
+    }
+}
+
+label {
+    display:block;
+}
+
+#inputs {
+    max-width: 550px;
+}
+
+/* the has selector is only valid in CSS4 which no browsers actually support yet */
+.field:has(input:disabled) {
+    display:none;
+}
+
+.field:has(input:enabled) {
+    display:initial;
+}
+
+.field {
+    padding-bottom:15px;
+    width: 100%;
+}
+
+.col {
+    display:flex;
+}
+.col div.field {
+    flex:auto;
+}
+
+#currentLevel, #maxLevel {
+    width: 7ch;
+}
+
+#currentAtk, #currentDef, #currentSol {
+    width: 10ch;
+}
+
+table {
+  margin-top:20px;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+  padding: 3px;
+}
+
+.footer {
+    font-size: 0.8em;
+}
