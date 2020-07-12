@@ -28,6 +28,9 @@
 }
 
 /* common styles*/
+#menu {
+    padding-top: 15px;
+}
 
 label {
     display:block;
