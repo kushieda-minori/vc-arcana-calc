@@ -41,7 +41,7 @@ function getSetting(cname) {
             }
         }
     }
-    return "";
+    return null;
 };
 
 // this function is to initialize the form with card information
@@ -50,11 +50,12 @@ function init() {
     var settings = document.forms["settings"];
     for(var i=0; i< settings.elements.length; i++) {
         val = settings.elements[i];
-        if (val.name) {
+        var setting = getSetting(val.name);
+        if (val.name && setting !== null) {
             if (val.type == "checkbox") {
-                val.checked = !!getSetting(val.name);
+                val.checked = !!setting;
             } else {
-                val.value = getSetting(val.name);
+                val.value = setting;
             }
         }
     }
@@ -179,6 +180,11 @@ function rebirthChange(checkbox, form) {
     
     currentSolInput.min = selectedCard.baseSol;
     currentSolInput.max = selectedCard.maxRaritySol;
+
+    var settings = document.forms["settings"];
+    if (settings["automaxlevel"].checked) {
+        maxLevelInput.value = maxLevelInput.max;
+    }
 };
 
 function updateLevelLimits(currentLevelInput, maxLevelInput, card) {
