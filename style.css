@@ -1,102 +1,166 @@
 /* Style Sheets determine the look and feel of the page. */
 /* Dark mode overrides */
 .dark-mode {
-    background: #333;
-    color: #ddd;
+  background: #333;
+  color: #ddd;
 }
 
-.dark-mode input, .dark-mode select, .dark-mode button {
-    background: #888;
-    color: #ddd;
-    border-color: #ccc;
+.dark-mode input,
+.dark-mode select,
+.dark-mode button {
+  background: #888;
+  color: #ddd;
+  border-color: #ccc;
 }
 
 .dark-mode :link {
-    color: #f5f5f5;
+  color: #f5f5f5;
 }
 
 .dark-mode a:hover {
-    color: rgb(255, 254, 192);
+  color: rgb(255, 254, 192);
 }
 
 .dark-mode a:active {
-    color: rgb(255, 235, 192);
+  color: rgb(255, 235, 192);
 }
 
 .dark-mode :visited {
-    color: pink;
+  color: pink;
 }
-
 
 /* common styles*/
 #noscript {
-    font-size: larger;
-    font-weight: bolder;
-    padding: 15px;
-    display: block;
-    color: maroon;
-    text-decoration: underline;
+  font-size: larger;
+  font-weight: bolder;
+  padding: 15px;
+  display: block;
+  color: maroon;
+  text-decoration: underline;
 }
 #pageContent {
-    max-width: 550px;
-    margin: auto;
+  max-width: 550px;
+  margin: auto;
 }
 
 #menu {
-    margin-top: 15px;
-    border: 1px solid black;
+  margin-top: 15px;
+  border: 1px solid black;
 }
 
 #menu .header {
-    display: block;
-    text-decoration: double underline;
-    margin-bottom: 5px;
+  display: block;
+  text-decoration: double underline;
+  margin-bottom: 5px;
 }
 
 label {
-    display:block;
+  display: block;
 }
-
 
 /* the has selector is only valid in CSS4 which no browsers actually support yet */
 .field:has(input:disabled) {
-    display:none;
+  display: none;
 }
 
 .field:has(input:enabled) {
-    display:initial;
+  display: initial;
 }
 
 .field {
-    padding-bottom:15px;
-    width: 100%;
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+input:in-range {
+  border-color: green;
 }
 
 .col {
-    display:flex;
+  display: flex;
 }
 .col div.field {
-    flex:auto;
+  flex: auto;
 }
 
-#currentLevel, #maxLevel {
-    width: 7ch;
+#currentLevel,
+#maxLevel {
+  width: 7ch;
 }
 
-#currentAtk, #currentDef, #currentSol {
-    width: 10ch;
+#currentAtk,
+#currentDef,
+#currentSol {
+  width: 10ch;
 }
 
 table {
-  margin-top:20px;
+  margin-top: 20px;
   border-collapse: collapse;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid black;
   padding: 3px;
 }
 
 .footer {
-    font-size: 0.8em;
+  font-size: 0.8em;
+}
+
+/* checkbox as slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 1em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 1em;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 1em;
+  width: 1em;
+  left: 0px;
+  bottom: 0px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(1em);
+  -ms-transform: translateX(1em);
+  transform: translateX(1em);
 }

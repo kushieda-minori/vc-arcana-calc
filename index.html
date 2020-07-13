@@ -65,6 +65,7 @@
     <script src="cardInfo.js"></script>
     <script type="text/javascript" src="code.js"></script>
 </head>
+
 <body onload="init();" class="">
     <div id="pageContent">
         <noscript><span id="noscript">This web page requires Javascript to be enabled.</span></noscript>
@@ -81,8 +82,12 @@
                     </datalist>
                 </div>
                 <div class="field">
-                    <label for="rebirth">Intending to rebirth:</label>
-                    <input type="checkbox" name="rebirth" id="rebirth" disabled="true" onchange="rebirthChange(this,this.form);" />
+                    <label for="rebirth"><div>Intending to rebirth:</div>
+                    <div class="switch">
+                        <input type="checkbox" name="rebirth" id="rebirth" disabled="true" onchange="rebirthChange(this,this.form);" />
+                        <span class="slider"></span>
+                    </div>
+                    </label>
                 </div>
             </div>
             <div class="col">
@@ -107,7 +112,7 @@
             </div>
             <div class="field">
                 <label for="currentSol">Current Soldiers (Optional):</label>
-                <input type="number" min="1" max="200000" name="currentSol" id="currentSol"/>
+                <input type="number" min="1" max="200000" name="currentSol" id="currentSol" />
             </div>
             <div>
                 <button type="reset">Reset</button>
@@ -118,15 +123,30 @@
             <caption>Arcana Results</caption>
             <thead>
                 <tr>
-                    <th>Stat:</th><th>Amt Needed</th><th>Target</th><th>+50 Arcana</th><th>+500 Arcana</th><th>+3k Arcana</th>
+                    <th>Stat:</th>
+                    <th>Amt Needed</th>
+                    <th>Target</th>
+                    <th>+50 Arcana</th>
+                    <th>+500 Arcana</th>
+                    <th>+3k Arcana</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Attack</td><td id="atkMissing"></td><td id="atkTarget"></td><td id="atk50"></td><td id="atk500"></td><td id="atk3000"></td>
+                    <td>Attack</td>
+                    <td id="atkMissing"></td>
+                    <td id="atkTarget"></td>
+                    <td id="atk50"></td>
+                    <td id="atk500"></td>
+                    <td id="atk3000"></td>
                 </tr>
                 <tr>
-                    <td>Defense</td><td id="defMissing"></td><td id=defTarget></td><td id="def50"></td><td id="def500"></td><td id="def3000"></td>
+                    <td>Defense</td>
+                    <td id="defMissing"></td>
+                    <td id=defTarget></td>
+                    <td id="def50"></td>
+                    <td id="def500"></td>
+                    <td id="def3000"></td>
                 </tr>
             </tbody>
         </table>
@@ -134,12 +154,16 @@
             <caption>Soldier Info</caption>
             <thead>
                 <tr>
-                    <th>Expected</th><th>Perfect Evo</th><th>Difference</th>
+                    <th>Expected</th>
+                    <th>Perfect Evo</th>
+                    <th>Difference</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td id="soldiersMax">&nbsp;</td><td id="soldiersPerfect"></td><td id="soldiersDifference"></td>
+                    <td id="soldiersMax">&nbsp;</td>
+                    <td id="soldiersPerfect"></td>
+                    <td id="soldiersDifference"></td>
                 </tr>
             </tbody>
         </table>
@@ -148,22 +172,40 @@
             <form id="settings" onchange="" onsubmit="return false;" autocomplete="off">
                 <div class="col">
                     <div class="field">
-                        <label for="darkmode">Use Dark Mode Theme:</label>
-                        <input type="checkbox" name="darkmode" id="darkmode" onchange="settingCheckChange(this,this.form);" />
+                        <label for="darkmode"><div>Use Dark Mode Theme:</div>
+                            <div class="switch">
+                                <input type="checkbox" name="darkmode" id="darkmode"
+                                    onchange="settingCheckChange(this,this.form);" />
+                                <span class="slider"></span>
+                            </div>
+                        </label>
                     </div>
                     <div class="field">
-                        <label for="savevals">Save values across reloads:</label>
-                        <input type="checkbox" name="savevals" id="savevals" onchange="settingCheckChange(this,this.form);" />
+                        <label for="savevals"><div>Save values across reloads:</div>
+                            <div class="switch">
+                                <input type="checkbox" name="savevals" id="savevals"
+                                    onchange="settingCheckChange(this,this.form);" />
+                                <span class="slider"></span>
+                            </div>
+                        </label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="field">
-                        <label for="autocalc">Auto calculate while entering values:</label>
-                        <input type="checkbox" name="autocalc" id="autocalc" checked="checked" onchange="settingCheckChange(this,this.form);" />
+                        <label for="autocalc"><div>Auto calculate while entering values:</div>
+                            <div class="switch">
+                                <input type="checkbox" name="autocalc" id="autocalc" checked="checked" onchange="settingCheckChange(this,this.form);" />
+                                <span class="slider"></span>
+                            </div>
+                        </label>
                     </div>
                     <div class="field">
-                        <label for="automaxlevel">Auto select max level on card change:</label>
-                        <input type="checkbox" name="automaxlevel" id="automaxlevel" checked="checked" onchange="settingCheckChange(this,this.form);" />
+                        <label for="automaxlevel"><div>Auto select max level on card change:</div>
+                            <div class="switch">
+                                <input type="checkbox" name="automaxlevel" id="automaxlevel" checked="checked" onchange="settingCheckChange(this,this.form);" />
+                                <span class="slider"></span>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </form>
@@ -181,4 +223,5 @@
         </div>
     </div>
 </body>
+
 </html>
