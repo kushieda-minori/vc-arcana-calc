@@ -1,13 +1,16 @@
 var selectedCard = null;
 
 function setSetting(cname, cvalue, exdays) {
+    // if we can use local storage, do so. 
     if (typeof(Storage) !== "undefined") {
         if ((exdays && exdays < 1) || !cvalue) {
             localStorage.removeItem(cname);
         } else {
             localStorage.setItem(cname, cvalue);
         }
-    } else {
+    }
+    // otherwise fall back to using cookies
+    else {
         var expires = "";
         if(exdays){
             var d = new Date();
@@ -19,9 +22,12 @@ function setSetting(cname, cvalue, exdays) {
 };
 
 function getSetting(cname) {
+    // if we can use local storage, do so. 
     if (typeof(Storage) !== "undefined") {
         return localStorage.getItem(cname);
-    } else {
+    }
+    // otherwise fall back to using cookies
+    else {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
         var ca = decodedCookie.split(';');
@@ -40,14 +46,25 @@ function getSetting(cname) {
 
 // this function is to initialize the form with card information
 function init() {
-    // load settings from cookies
-    var darkMode = getSetting("darkmode");
-    if (darkMode) {
-        document.getElementById("darkmode").checked = true;
+    // restore settings
+    var settings = document.forms["settings"];
+    for(var i=0; i< settings.elements.length; i++) {
+        val = settings.elements[i];
+        if (val.name) {
+            if (val.type == "checkbox") {
+                val.checked = !!getSetting(val.name);
+            } else {
+                val.value = getSetting(val.name);
+            }
+        }
+    }
+
+    // update display first thing if needed.
+    if (settings["darkmode"].checked) {
         document.body.classList.add("dark-mode");
     }
 
-    var cardSelect = document.forms["inputs"]["card"];
+    var cardSelect = document.getElementById("cardList");//document.forms["inputs"]["card"];
     // card info is loaded from the script tag in the header.
     if(typeof cardInfo === 'undefined' || !cardInfo.length){
         alert("Card info did not load properly");
@@ -66,26 +83,49 @@ function init() {
     });
 
     cardInfo.forEach(function(val,idx,arr){
-        var option = document.createElement("option");
-        option.value = val.id;
-        option.text = val.name + " - " + val.rarity;
-        cardSelect.add(option);
+        var opName = val.name + " - " + val.rarity;
+        cardSelect.innerHTML += '<option value="' + opName + '">' + opName + '</option>\n';
     });
+
+    if(settings["savevals"].checked) {
+        restoreInputs();
+    }
 };
 
+function restoreInputs() {
+    var form = document.forms["inputs"];
+    var formFields = form.elements;
+    for (var i=0; i<formFields.length; i++) {
+        var field = formFields[i];
+        if (field.type == "checkbox") {
+            field.checked = !!getSetting("input_"+field.name);
+        } else if (field.nodeName != "BUTTON") {
+            field.value = getSetting("input_"+field.name);
+        }
+    }
+    cardChange(form["card"], form)
+}
+
+function saveInputs() {
+    var formFields = document.forms["inputs"].elements;
+    for (var i=0; i<formFields.length; i++) {
+        var field = formFields[i];
+        if (field.type == "checkbox") {
+            setSetting("input_"+field.name, field.checked);
+        } else if (field.nodeName != "BUTTON") {
+            setSetting("input_"+field.name, field.value);
+        }
+    }
+}
+
 // this function is to react to user selection changes of the card
-function cardChange(select,form) {
+function cardChange(select, form) {
     var cardId = select.value;
+    // find the card in the cardInfo array
+    const found = cardInfo.find(c => (c.name + ' - ' + c.rarity) == cardId);
     var willRebirthCheck = form["rebirth"];
     var maxLvlElement = document.getElementById("rarityMaxLevel");
-    if(!cardId || !(Number.isInteger(cardId) && cardId > 0)) {
-        selectedCard = null;
-        willRebirthCheck.disabled = true;
-        willRebirthCheck.checked = false;
-        maxLvlElement.textContent = "N/A";
-    }
-    // find the card in the cardInfo array
-    const found = cardInfo.find(c => c.id == cardId);
+
     if(!found) {
         selectedCard = null;
         willRebirthCheck.disabled = true;
@@ -93,6 +133,7 @@ function cardChange(select,form) {
         maxLvlElement.textContent = "N/A";
         return;
     }
+
     selectedCard = found;
     if (selectedCard.rebirthCardId) {
         willRebirthCheck.disabled = false;
@@ -163,8 +204,13 @@ function levelChange(input, form) {
 
 // this function reacts to any of the values changing in the form
 function formChange(form) {
-    // comment this if you want to have to hit the "Calculate" button
-    calculateArcana(form);
+    var settings = document.forms["settings"];
+    if (settings["savevals"].checked) {
+        saveInputs();
+    }
+    if (settings["autocalc"].checked) {
+        calculateArcana(form);
+    }
 };
 
 function formValid(form) {
@@ -274,12 +320,13 @@ function calculateArcana(form) {
     soldiersDifference.textContent = solPerfectEvo - solAtMaxLvl;
 };
 
-function modeChange(check, form) {
+function settingCheckChange(check, form) {
     if(check.checked) {
-        document.body.classList.add("dark-mode");
-        setSetting("darkmode", check.checked);
+        if (check.name == "darkmode") { document.body.classList.add("dark-mode"); }
+        if (check.name == "savevals") { saveInputs(); }
+        setSetting(check.name, check.checked);
     } else {
-        document.body.classList.remove("dark-mode");
-        setSetting("darkmode", check.checked, -1);
+        if (check.name == "darkmode") { document.body.classList.remove("dark-mode"); }
+        setSetting(check.name, check.checked, -1);
     }
 };

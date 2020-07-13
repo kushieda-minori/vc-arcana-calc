@@ -27,18 +27,36 @@
     color: pink;
 }
 
+
 /* common styles*/
+#noscript {
+    font-size: larger;
+    font-weight: bolder;
+    padding: 15px;
+    display: block;
+    color: maroon;
+    text-decoration: underline;
+}
+#pageContent {
+    max-width: 550px;
+    margin: auto;
+}
+
 #menu {
-    padding-top: 15px;
+    margin-top: 15px;
+    border: 1px solid black;
+}
+
+#menu .header {
+    display: block;
+    text-decoration: double underline;
+    margin-bottom: 5px;
 }
 
 label {
     display:block;
 }
 
-#inputs {
-    max-width: 550px;
-}
 
 /* the has selector is only valid in CSS4 which no browsers actually support yet */
 .field:has(input:disabled) {
