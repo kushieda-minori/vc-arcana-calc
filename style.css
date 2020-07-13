@@ -45,6 +45,7 @@
 
 #menu {
   margin-top: 15px;
+  padding: 3px;
   border: 1px solid black;
 }
 
@@ -151,7 +152,7 @@ td {
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked:enabled + .slider {
   background-color: #2196f3;
 }
 
@@ -159,7 +160,7 @@ input:focus + .slider {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .slider:before {
+input:checked:enabled + .slider:before {
   -webkit-transform: translateX(1em);
   -ms-transform: translateX(1em);
   transform: translateX(1em);
