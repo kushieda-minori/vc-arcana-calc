@@ -56,21 +56,18 @@
 }
 
 .nav-toggle form {
-  max-height: 7em;
-  overflow: hidden;
-  /*transform: scaleY(1);*/
+  max-height: 8em;
+  overflow: auto;
   transform-origin: top;
   -webkit-transition: 0.75s;
-  /*transition: transform 0.75s ease;*/
   transition: max-height 0.75s ease-in;
 }
 
 .nav-toggle.collapse-form-height form {
   max-height: 0px;
-  /*transform: scaleY(0);*/
+  overflow: hidden;
   transform-origin: top;
   -webkit-transition: 0.75s;
-  /*transition: transform 0.75s ease;*/
   transition: max-height 0.75s ease-out;
 }
 
