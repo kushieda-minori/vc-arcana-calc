@@ -56,7 +56,7 @@
 }
 
 .nav-toggle form {
-  max-height: 8em;
+  max-height: 10em;
   overflow: auto;
   transform-origin: top;
   -webkit-transition: 0.75s;
