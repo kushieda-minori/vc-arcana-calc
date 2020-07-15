@@ -55,6 +55,37 @@
   margin-bottom: 5px;
 }
 
+.nav-toggle form {
+  max-height: 7em;
+  overflow: hidden;
+  /*transform: scaleY(1);*/
+  transform-origin: top;
+  -webkit-transition: 0.75s;
+  /*transition: transform 0.75s ease;*/
+  transition: max-height 0.75s ease-in;
+}
+
+.nav-toggle.collapse-form-height form {
+  max-height: 0px;
+  /*transform: scaleY(0);*/
+  transform-origin: top;
+  -webkit-transition: 0.75s;
+  /*transition: transform 0.75s ease;*/
+  transition: max-height 0.75s ease-out;
+}
+
+.nav-toggle .header {
+  cursor: pointer;
+}
+
+.nav-toggle .header:before {
+  content: 'X ';
+}
+
+.nav-toggle.collapse-form-height .header:before {
+  content: '+ ';
+}
+
 label {
   display: block;
 }
@@ -82,6 +113,10 @@ input:in-range {
 }
 .col div.field {
   flex: auto;
+}
+
+#card {
+  width: 100%;
 }
 
 #currentLevel,

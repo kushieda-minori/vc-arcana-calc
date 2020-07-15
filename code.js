@@ -336,3 +336,14 @@ function settingCheckChange(check, form) {
         setSetting(check.name, check.checked, -1);
     }
 };
+
+function toggleNav(element) {
+    if(!element || !element.dataset || !element.dataset.parent_id) return;
+    var menu = document.getElementById(element.dataset.parent_id);
+    if(!menu) return;
+    if(menu.classList.contains("collapse-form-height")) {
+        menu.classList.remove("collapse-form-height");
+    } else {
+        menu.classList.add("collapse-form-height");
+    }
+};

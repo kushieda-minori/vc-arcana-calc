@@ -70,34 +70,32 @@
     <div id="pageContent">
         <noscript><span id="noscript">This web page requires Javascript to be enabled.</span></noscript>
         <form id="inputs" onchange="formChange(this);" onsubmit="return false;" autocomplete="off">
+            <div class="field">
+                <label for="card">Card:</label>
+                <input list="cardList" name="card" id="card" onchange="cardChange(this,this.form);" required="true" placeholder="---Select a card---" />
+                <datalist id="cardList">
+                    <!-- 
+                        The options are added by javascript and loads the card info
+                        defined in cardInfo.js
+                    -->
+                </datalist>
+            </div>
             <div class="col">
                 <div class="field">
-                    <label for="card">Card:</label>
-                    <input list="cardList" name="card" id="card" onchange="cardChange(this,this.form);" required="true" placeholder="---Select a card---" />
-                    <datalist id="cardList">
-                        <!-- 
-                            The options are added by javascript and loads the card info
-                            defined in cardInfo.js
-                        -->
-                    </datalist>
-                </div>
-                <div class="field">
-                    <label for="rebirth"><div>Intending to rebirth:</div>
+                    <label for="rebirth"><div>Will Rebirth:</div>
                     <div class="switch">
                         <input type="checkbox" name="rebirth" id="rebirth" disabled="true" onchange="rebirthChange(this,this.form);" />
                         <span class="slider"></span>
                     </div>
                     </label>
                 </div>
-            </div>
-            <div class="col">
                 <div class="field">
                     <label for="currentLevel">Current Level:</label>
                     <input type="number" min="1" max="130" name="currentLevel" id="currentLevel" value="1" required="true" onchange="levelChange(this,this.form);" />
                 </div>
                 <div class="field">
-                    <label for="maxLevel">Max Stats at Level:</label>
-                    <input type="number" min="1" max="130" name="maxLevel" id="maxLevel" required="true" onchange="levelChange(this,this.form);" /> out of <span id="rarityMaxLevel">N/A</span>
+                    <label for="maxLevel">Max Stat Level:</label>
+                    <input type="number" min="1" max="130" name="maxLevel" id="maxLevel" required="true" onchange="levelChange(this,this.form);" /> of <span id="rarityMaxLevel">N/A</span>
                 </div>
             </div>
             <div class="col">
@@ -109,10 +107,10 @@
                     <label for="currentDef">Current Defense:</label>
                     <input type="number" min="1" max="200000" name="currentDef" id="currentDef" required="true" />
                 </div>
-            </div>
-            <div class="field">
-                <label for="currentSol">Current Soldiers (Optional):</label>
-                <input type="number" min="1" max="200000" name="currentSol" id="currentSol" />
+                <div class="field">
+                    <label for="currentSol">Current Soldiers:</label>
+                    <input type="number" min="1" max="200000" name="currentSol" id="currentSol" />
+                </div>
             </div>
             <div>
                 <button type="reset">Reset</button>
@@ -167,8 +165,8 @@
                 </tr>
             </tbody>
         </table>
-        <div id="menu">
-            <span class="header">Options for using this calculator</span>
+        <div id="menu" class="nav-toggle collapse-form-height">
+            <div class="header" data-parent_id="menu" onclick="toggleNav(this)">Options for using this calculator</div>
             <form id="settings" onchange="" onsubmit="return false;" autocomplete="off">
                 <div class="col">
                     <div class="field">
