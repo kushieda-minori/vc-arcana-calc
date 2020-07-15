@@ -76,11 +76,11 @@
 }
 
 .nav-toggle .header:before {
-  content: '⏷ ';
+  content: '▽ ';
 }
 
 .nav-toggle.collapse-form-height .header:before {
-  content: '⏵ ';
+  content: '▷ ';
 }
 
 label {
