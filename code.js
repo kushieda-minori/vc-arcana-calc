@@ -123,7 +123,7 @@ function saveInputs() {
 function cardChange(select, form) {
     var cardId = select.value;
     // find the card in the cardInfo array
-    const found = cardInfo.find(c => (c.name + ' - ' + c.rarity) == cardId);
+    const found = cardInfo.find(c => (c.name + ' - ' + c.rarity).toLowerCase() == cardId.toLowerCase());
     var willRebirthCheck = form["rebirth"];
     var maxLvlElement = document.getElementById("rarityMaxLevel");
 
