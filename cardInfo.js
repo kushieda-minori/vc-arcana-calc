@@ -33,7 +33,7 @@ var cardInfo=[
     "maxRarityAtk": 150000,
     "maxRarityDef": 150000,
     "maxRaritySol": 150000,
-    "perfectSoldierCount": 76897,
+    "perfectSoldierCount": 83898,
     "rebirthCardId": 8606,
     "isClosed": false
   },
@@ -71,7 +71,7 @@ var cardInfo=[
     "maxRarityAtk": 150000,
     "maxRarityDef": 150000,
     "maxRaritySol": 150000,
-    "perfectSoldierCount": 76897,
+    "perfectSoldierCount": 83898,
     "rebirthCardId": 7429,
     "isClosed": false
   },
@@ -109,7 +109,7 @@ var cardInfo=[
     "maxRarityAtk": 150000,
     "maxRarityDef": 150000,
     "maxRaritySol": 150000,
-    "perfectSoldierCount": 76897,
+    "perfectSoldierCount": 83898,
     "rebirthCardId": 7301,
     "isClosed": false
   },
@@ -185,7 +185,7 @@ var cardInfo=[
     "maxRarityAtk": 150000,
     "maxRarityDef": 150000,
     "maxRaritySol": 150000,
-    "perfectSoldierCount": 76897,
+    "perfectSoldierCount": 83898,
     "rebirthCardId": 7727,
     "isClosed": false
   },
@@ -204,7 +204,7 @@ var cardInfo=[
     "maxRarityAtk": 150000,
     "maxRarityDef": 150000,
     "maxRaritySol": 150000,
-    "perfectSoldierCount": 76897,
+    "perfectSoldierCount": 83898,
     "rebirthCardId": 7535,
     "isClosed": false
   },
@@ -242,7 +242,7 @@ var cardInfo=[
     "maxRarityAtk": 150000,
     "maxRarityDef": 150000,
     "maxRaritySol": 150000,
-    "perfectSoldierCount": 76897,
+    "perfectSoldierCount": 83898,
     "rebirthCardId": 7630,
     "isClosed": false
   },
@@ -280,7 +280,7 @@ var cardInfo=[
     "maxRarityAtk": 150000,
     "maxRarityDef": 150000,
     "maxRaritySol": 150000,
-    "perfectSoldierCount": 76897,
+    "perfectSoldierCount": 83898,
     "rebirthCardId": 7430,
     "isClosed": false
   },
@@ -337,7 +337,7 @@ var cardInfo=[
     "maxRarityAtk": 150000,
     "maxRarityDef": 150000,
     "maxRaritySol": 150000,
-    "perfectSoldierCount": 77996,
+    "perfectSoldierCount": 79998,
     "rebirthCardId": 7177,
     "isClosed": false
   },
@@ -2332,7 +2332,7 @@ var cardInfo=[
     "maxRarityAtk": 200000,
     "maxRarityDef": 200000,
     "maxRaritySol": 200000,
-    "perfectSoldierCount": 136296,
+    "perfectSoldierCount": 138298,
     "rebirthCardId": null,
     "isClosed": false
   },
@@ -2807,7 +2807,7 @@ var cardInfo=[
     "maxRarityAtk": 200000,
     "maxRarityDef": 200000,
     "maxRaritySol": 200000,
-    "perfectSoldierCount": 142997,
+    "perfectSoldierCount": 149998,
     "rebirthCardId": null,
     "isClosed": false
   },
@@ -3529,7 +3529,7 @@ var cardInfo=[
     "maxRarityAtk": 200000,
     "maxRarityDef": 200000,
     "maxRaritySol": 200000,
-    "perfectSoldierCount": 142997,
+    "perfectSoldierCount": 149998,
     "rebirthCardId": null,
     "isClosed": false
   },
@@ -3548,7 +3548,7 @@ var cardInfo=[
     "maxRarityAtk": 200000,
     "maxRarityDef": 200000,
     "maxRaritySol": 200000,
-    "perfectSoldierCount": 142997,
+    "perfectSoldierCount": 149998,
     "rebirthCardId": null,
     "isClosed": false
   },
@@ -4061,7 +4061,7 @@ var cardInfo=[
     "maxRarityAtk": 200000,
     "maxRarityDef": 200000,
     "maxRaritySol": 200000,
-    "perfectSoldierCount": 142997,
+    "perfectSoldierCount": 149998,
     "rebirthCardId": null,
     "isClosed": false
   },
@@ -4517,7 +4517,7 @@ var cardInfo=[
     "maxRarityAtk": 200000,
     "maxRarityDef": 200000,
     "maxRaritySol": 200000,
-    "perfectSoldierCount": 142997,
+    "perfectSoldierCount": 149998,
     "rebirthCardId": null,
     "isClosed": false
   },
@@ -5011,7 +5011,7 @@ var cardInfo=[
     "maxRarityAtk": 200000,
     "maxRarityDef": 200000,
     "maxRaritySol": 200000,
-    "perfectSoldierCount": 142997,
+    "perfectSoldierCount": 149998,
     "rebirthCardId": null,
     "isClosed": false
   },
@@ -11718,7 +11718,7 @@ var cardInfo=[
     "maxRarityAtk": 200000,
     "maxRarityDef": 200000,
     "maxRaritySol": 200000,
-    "perfectSoldierCount": 142997,
+    "perfectSoldierCount": 149998,
     "rebirthCardId": null,
     "isClosed": false
   },
